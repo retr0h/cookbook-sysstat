@@ -25,7 +25,11 @@ describe_recipe "cookbook-sysstat" do
   describe "files" do
     let(:config) { file node['sysstat']['settings'] }
 
-    it { config.must_include 'ENABLED="true"' }
+    it "is enabled in the config" do
+      if %w{debian ubuntu}.include? node['platform']
+        config.must_include 'ENABLED="true"'
+      end
+    end
 
     ##
     # Awaiting 10.14.0

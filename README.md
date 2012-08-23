@@ -26,6 +26,11 @@ default
 
 Installs/Configures sysstat
 
+TODO
+====
+
+* Correct tests once 10.14.0 Chef released.
+
 License and Author
 ==================
 

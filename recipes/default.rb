@@ -27,11 +27,23 @@ service "sysstat" do
   action [ :enable, :start ]
 end
 
-template node['sysstat']['settings'] do
-  source "sysstat.erb"
-  owner  "root"
-  group  "root"
-  mode   0644
+if platform? %w{debian ubuntu}
+  template node['sysstat']['settings'] do
+    source "sysstat.erb"
+    owner  "root"
+    group  "root"
+    mode   0644
 
-  notifies :restart, resources(:service => "sysstat")
+    variables(
+      :enabled => node['sysstat']['enabled']
+    )
+
+    notifies :restart, resources(:service => "sysstat")
+
+    ##
+    # Not sure I agree with foodcritic here:
+    # http://acrmp.github.com/foodcritic/#FC023
+
+    #only_if { platform? %w{debian ubuntu} }
+  end
 end

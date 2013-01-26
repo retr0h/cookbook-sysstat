@@ -1,3 +1,4 @@
+name             "sysstat"
 maintainer       "John Dewey"
 maintainer_email "john@dewey.ws"
 license          "Apache 2.0"
@@ -7,6 +8,6 @@ version          "1.2.0"
 
 recipe           "sysstat", "Installs/Configures sysstat"
 
-%w{ centos debian ubuntu }.each do |os|
+%w{ debian ubuntu }.each do |os|
   supports os
 end

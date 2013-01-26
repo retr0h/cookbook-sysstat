@@ -2,7 +2,7 @@
 # Cookbook Name:: sysstat
 # Recipe:: default
 #
-# Copyright 2012 John Dewey
+# Copyright 2012-2013, John Dewey
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ if platform? %w{debian ubuntu}
     source "sysstat.erb"
     owner  "root"
     group  "root"
-    mode   0644
+    mode   00644
 
     variables(
       :enabled => node['sysstat']['enabled']

@@ -1,5 +1,4 @@
 require "chefspec"
-require "fauxhai"
 
 describe "sysstat::default" do
   before do

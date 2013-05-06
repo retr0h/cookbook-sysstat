@@ -7,50 +7,52 @@ describe "sysstat::default" do
   end
 
   it "installs package" do
-    @chef_run.should upgrade_package "sysstat"
+    expect(@chef_run).to upgrade_package "sysstat"
   end
 
   it "starts service" do
-    @chef_run.should start_service "sysstat"
+    expect(@chef_run).to start_service "sysstat"
   end
 
   it "enables service" do
-    @chef_run.should set_service_to_start_on_boot "sysstat"
+    expect(@chef_run).to set_service_to_start_on_boot "sysstat"
   end
 
   describe "debian platform" do
     before do
-      ::Fauxhai.mock platform:"ubuntu", version:"12.04"
-      #::Fauxhai.mock platform:"debian", version:"6.0.5"
-      @chef_run = ::ChefSpec::ChefRunner.new.converge "sysstat::default"
-      @file = "/etc/default/sysstat"
+      @chef_run = ::ChefSpec::ChefRunner.new(
+        :platform  => "ubuntu",
+        :version   => "12.04",
+        :log_level => :fatal
+      ).converge "sysstat::default"
+      @file = @chef_run.template "/etc/default/sysstat"
     end
 
     it "has proper owner" do
-      @chef_run.template(@file).should be_owned_by("root", "root")
+      expect(@file).to be_owned_by("root", "root")
     end
 
     it "has proper modes" do
-      m = @chef_run.template(@file).mode
-
-      sprintf("%o", m).should == "644"
+      expect(sprintf("%o", @file.mode)).to eq "644"
     end
 
     it "is enabled" do
-      @chef_run.should create_file_with_content @file,
+      expect(@chef_run).to create_file_with_content @file.name,
         %Q{ENABLED="true"}
     end
   end
 
   describe "rhel platform" do
     before do
-      ::Fauxhai.mock platform:"centos", version:"6.3"
-      @chef_run = ::ChefSpec::ChefRunner.new.converge "sysstat::default"
-      @file = "/etc/default/sysstat"
+      @chef_run = ::ChefSpec::ChefRunner.new(
+        :platform  => "redhat",
+        :log_level => :fatal
+      ).converge "sysstat::default"
+      @file = @chef_run.template "/etc/default/sysstat"
     end
-  end
 
-  it "doesn't create file" do
-    @chef_run.should_not create_file @file
+    it "doesn't create file" do
+      expect(@chef_run).not_to create_file @file
+    end
   end
 end

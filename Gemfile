@@ -1,6 +1,5 @@
-source :rubygems
+source "https://rubygems.org"
 
 gem "berkshelf",  "~> 1.0.4"
-gem "chefspec",   "~> 0.9.0"
+gem "chefspec",   "~> 1.0.0"
 gem "foodcritic", "~> 1.6.1"
-gem "fauxhai",    "~> 0.1.1"

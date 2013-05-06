@@ -17,7 +17,7 @@ describe "sysstat::default" do
     expect(@chef_run).to set_service_to_start_on_boot "sysstat"
   end
 
-  describe "debian platform" do
+  describe "ubuntu" do
     before do
       @chef_run = ::ChefSpec::ChefRunner.new(
         :platform  => "ubuntu",
@@ -41,7 +41,7 @@ describe "sysstat::default" do
     end
   end
 
-  describe "rhel platform" do
+  describe "redhat" do
     before do
       @chef_run = ::ChefSpec::ChefRunner.new(
         :platform  => "redhat",

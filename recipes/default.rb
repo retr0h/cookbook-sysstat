@@ -23,27 +23,26 @@ end
 
 service "sysstat" do
   supports :restart => true, :status => true
-
   action [ :enable, :start ]
 end
 
-if platform? %w{debian ubuntu}
-  template node['sysstat']['settings'] do
-    source "sysstat.erb"
-    owner  "root"
-    group  "root"
-    mode   00644
+template node['sysstat']['settings'] do
+  source "sysstat.erb"
+  owner  "root"
+  group  "root"
+  mode   00644
+  variables(
+    :enabled => node['sysstat']['enabled']
+  )
+  notifies :restart, "service[sysstat]"
+  only_if platform? %w{debian ubuntu}
+end
 
-    variables(
-      :enabled => node['sysstat']['enabled']
-    )
-
-    notifies :restart, resources(:service => "sysstat")
-
-    ##
-    # Not sure I agree with foodcritic here:
-    # http://acrmp.github.com/foodcritic/#FC023
-
-    #only_if { platform? %w{debian ubuntu} }
-  end
+template node['sysstat']['settings'] do
+  source "rhel-sysstat.erb"
+  owner  "root"
+  group  "root"
+  mode   0644
+  notifies :restart, "service[sysstat]"
+  only_if platform? %w{centos rhel}
 end

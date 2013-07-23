@@ -19,3 +19,5 @@
 
 default['sysstat']['settings'] = ::File.join ::File::SEPARATOR, "etc", "default", "sysstat"
 default['sysstat']['enabled'] = "true"
+
+default['sysstat']['history'] = "7"

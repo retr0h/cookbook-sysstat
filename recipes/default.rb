@@ -35,7 +35,7 @@ template node['sysstat']['settings'] do
     :enabled => node['sysstat']['enabled']
   )
   notifies :restart, "service[sysstat]"
-  only_if platform? %w{debian ubuntu}
+  only_if { platform? %w{debian ubuntu} }
 end
 
 template node['sysstat']['settings'] do
@@ -44,5 +44,5 @@ template node['sysstat']['settings'] do
   group  "root"
   mode   0644
   notifies :restart, "service[sysstat]"
-  only_if platform? %w{centos rhel}
+  only_if { platform_family? %w{rhel} }
 end

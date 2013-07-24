@@ -19,5 +19,8 @@
 
 default['sysstat']['settings'] = ::File.join ::File::SEPARATOR, "etc", "default", "sysstat"
 default['sysstat']['enabled'] = "true"
-
 default['sysstat']['history'] = "7"
+
+if platform_family? %w{rhel} 
+  default['sysstat']['settings'] = ::File.join ::File::SEPARATOR, "etc", "sysconfig", "sysstat"
+end

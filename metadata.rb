@@ -8,6 +8,6 @@ version          "1.2.0"
 
 recipe           "sysstat", "Installs/Configures sysstat"
 
-%w{ debian ubuntu }.each do |os|
+%w{ debian ubuntu redhat centos}.each do |os|
   supports os
 end

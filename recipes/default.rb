@@ -38,7 +38,7 @@ if platform? %w{debian ubuntu}
       :enabled => node['sysstat']['enabled']
     )
 
-    notifies :restart, resources(:service => "sysstat")
+    notifies :restart, "service[sysstat]"
 
     ##
     # Not sure I agree with foodcritic here:

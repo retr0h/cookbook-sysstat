@@ -20,8 +20,7 @@ task :lint do
 end
 
 task :unit do
-  sh "bundle exec rspec .cookbooks/#{ENV['COOKBOOK_NAME']}"
+  sh "bundle exec rspec .cookbooks/#{ENV['COOKBOOK_NAME']}/spec"
 end
-
 
 task :default => [:setup, :lint, :unit]

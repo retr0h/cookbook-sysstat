@@ -16,6 +16,7 @@ Attributes
 
 * default['sysstat']['settings'] - Path to default settings file.
 * default['sysstat']['enabled'] - Run sysstat on boot.
+* default['sysstat']['history'] - Defaults to 7 days
 
 Usage
 =====

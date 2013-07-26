@@ -1,30 +1,23 @@
-require "chefspec"
+require "spec_helper"
 
 describe "sysstat::default" do
-  before do
-    @chef_run = ::ChefSpec::ChefRunner.new.converge "sysstat::default"
-  end
-
-  it "installs package" do
-    expect(@chef_run).to upgrade_package "sysstat"
-  end
-
-  it "starts service" do
-    expect(@chef_run).to start_service "sysstat"
-  end
-
-  it "enables service" do
-    expect(@chef_run).to set_service_to_start_on_boot "sysstat"
-  end
-
   describe "ubuntu" do
     before do
-      @chef_run = ::ChefSpec::ChefRunner.new(
-        :platform  => "ubuntu",
-        :version   => "12.04",
-        :log_level => :fatal
-      ).converge "sysstat::default"
+      @chef_run = ::ChefSpec::ChefRunner.new ::UBUNTU_OPTS
+      @chef_run.converge "sysstat::default"
       @file = @chef_run.template "/etc/default/sysstat"
+    end
+
+    it "installs package" do
+      expect(@chef_run).to upgrade_package "sysstat"
+    end
+
+    it "starts service" do
+      expect(@chef_run).to start_service "sysstat"
+    end
+
+    it "enables service" do
+      expect(@chef_run).to set_service_to_start_on_boot "sysstat"
     end
 
     it "has proper owner" do
@@ -43,10 +36,8 @@ describe "sysstat::default" do
 
   describe "redhat" do
     before do
-      @chef_run = ::ChefSpec::ChefRunner.new(
-        :platform  => "redhat",
-        :log_level => :fatal
-      ).converge "sysstat::default"
+      @chef_run = ::ChefSpec::ChefRunner.new ::REDHAT_OPTS
+      @chef_run.converge "sysstat::default"
       @file = @chef_run.template "/etc/default/sysstat"
     end
 

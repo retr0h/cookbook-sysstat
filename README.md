@@ -32,7 +32,7 @@ default
 Installs/Configures sysstat
 
 Testing
-=====
+=======
 
 This cookbook is using [ChefSpec](https://github.com/acrmp/chefspec) for
 testing. Should run the following before commiting. It will run your tests,

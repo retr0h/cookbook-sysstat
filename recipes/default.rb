@@ -35,7 +35,9 @@ if platform? %w{debian ubuntu} # ~FC023
     mode   00644
 
     variables(
-      :enabled => node['sysstat']['enabled']
+      :enabled => node['sysstat']['enabled'],
+      :sa1_options => node['sysstat']['sa1_options'],
+      :sa2_options => node['sysstat']['sa2_options']
     )
 
     notifies :restart, "service[sysstat]"

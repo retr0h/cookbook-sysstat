@@ -3,8 +3,11 @@ require "spec_helper"
 describe "sysstat::default" do
   describe "ubuntu" do
     before do
-      @chef_run = ::ChefSpec::ChefRunner.new ::UBUNTU_OPTS
-      @chef_run.converge "sysstat::default"
+      @chef_run = ::ChefSpec::ChefRunner.new ::UBUNTU_OPTS do |n|
+        n.set['sysstat']['sa1_options'] = '-S DISK -S INT'
+        n.set['sysstat']['sa2_options'] = '-A'
+      end.converge "sysstat::default"
+
       @file = @chef_run.template "/etc/default/sysstat"
     end
 
@@ -31,6 +34,16 @@ describe "sysstat::default" do
     it "is enabled" do
       expect(@chef_run).to create_file_with_content @file.name,
         %Q{ENABLED="true"}
+    end
+
+    it "overrides sa1_options" do
+      expect(@chef_run).to create_file_with_content @file.name,
+        %Q{SA1_OPTIONS="-S DISK -S INT"}
+    end
+
+    it "overrides sa2_options" do
+      expect(@chef_run).to create_file_with_content @file.name,
+        %Q{SA2_OPTIONS="-A"}
     end
   end
 

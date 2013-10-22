@@ -19,3 +19,5 @@
 
 default['sysstat']['settings'] = ::File.join ::File::SEPARATOR, "etc", "default", "sysstat"
 default['sysstat']['enabled'] = "true"
+default['sysstat']['sa1_options'] = '-S DISK'
+default['sysstat']['sa2_options'] = ''

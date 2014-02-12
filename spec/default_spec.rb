@@ -26,8 +26,8 @@ describe 'sysstat::default' do
     end
 
     it 'has proper owner' do
-      expect(@file.owner).to eq('root')
-      expect(@file.group).to eq('root')
+      expect(@file.owner).to eq 'root'
+      expect(@file.group).to eq 'root'
     end
 
     it 'has proper modes' do

@@ -23,10 +23,7 @@ package 'sysstat' do
 end
 
 service 'sysstat' do
-  supports(
-    restart: true,
-    status: true
-  )
+  supports restart: true, status: true
 
   action [:enable, :start]
 end

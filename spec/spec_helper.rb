@@ -1,17 +1,16 @@
-require "chefspec"
+# encoding: UTF-8
 
-::LOG_LEVEL = :fatal
-::UBUNTU_OPTS = {
-  :platform => "ubuntu",
-  :version => "12.04",
-  :log_level => ::LOG_LEVEL
-}
-::REDHAT_OPTS = {
-  :platform => "redhat",
-  :version => "6.3",
-  :log_level => ::LOG_LEVEL
+require 'chef'
+require 'chefspec'
+require 'chefspec/berkshelf'
+require 'chefspec/deprecations'
+
+UBUNTU_OPTS = {
+  platform: 'ubuntu',
+  version: '12.04'
 }
 
-RSpec.configure do |c|
-  c.treat_symbols_as_metadata_keys_with_true_values = true
-end
+REDHAT_OPTS = {
+  platform: 'redhat',
+  version: '6.3'
+}

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 #
 # Cookbook Name:: sysstat
 # Recipe:: default
@@ -17,29 +18,32 @@
 # limitations under the License.
 #
 
-package "sysstat" do
+package 'sysstat' do
   action :upgrade
 end
 
-service "sysstat" do
-  supports :restart => true, :status => true
+service 'sysstat' do
+  supports(
+    restart: true,
+    status: true
+  )
 
-  action [ :enable, :start ]
+  action [:enable, :start]
 end
 
 if platform? %w{debian ubuntu} # ~FC023
   template node['sysstat']['settings'] do
-    source "sysstat.erb"
-    owner  "root"
-    group  "root"
+    source 'sysstat.erb'
+    owner  'root'
+    group  'root'
     mode   00644
 
     variables(
-      :enabled => node['sysstat']['enabled'],
-      :sa1_options => node['sysstat']['sa1_options'],
-      :sa2_options => node['sysstat']['sa2_options']
+      enabled: node['sysstat']['enabled'],
+      sa1_options: node['sysstat']['sa1_options'],
+      sa2_options: node['sysstat']['sa2_options']
     )
 
-    notifies :restart, "service[sysstat]"
+    notifies :restart, 'service[sysstat]'
   end
 end

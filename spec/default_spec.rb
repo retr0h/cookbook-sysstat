@@ -32,22 +32,22 @@ describe 'sysstat::default' do
     end
 
     it 'has proper modes' do
-      expect(sprintf('%o', file.mode)).to eq '644'
+      expect(format('%o', file.mode)).to eq '644'
     end
 
     it 'is enabled' do
       expect(chef_run).to render_file(file.name)
-        .with_content %Q{ENABLED="true"}
+        .with_content %Q(ENABLED="true")
     end
 
     it 'overrides sa1_options' do
       expect(chef_run).to render_file(file.name)
-        .with_content %Q{SA1_OPTIONS="-S DISK -S INT"}
+        .with_content %Q(SA1_OPTIONS="-S DISK -S INT")
     end
 
     it 'overrides sa2_options' do
       expect(chef_run).to render_file(file.name)
-        .with_content %Q{SA2_OPTIONS="-A"}
+        .with_content %Q(SA2_OPTIONS="-A")
     end
   end
 

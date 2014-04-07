@@ -28,12 +28,12 @@ service 'sysstat' do
   action [:enable, :start]
 end
 
-if platform? %w{debian ubuntu} # ~FC023
+if platform? %w(debian ubuntu) # ~FC023
   template node['sysstat']['settings'] do
     source 'sysstat.erb'
-    owner  'root'
-    group  'root'
-    mode   00644
+    owner 'root'
+    group 'root'
+    mode 00644
 
     variables(
       enabled: node['sysstat']['enabled'],

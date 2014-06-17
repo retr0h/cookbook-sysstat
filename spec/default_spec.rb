@@ -14,8 +14,24 @@ describe 'sysstat::default' do
     end
     let(:chef_run) { runner.converge(described_recipe) }
 
-    it 'installs package' do
-      expect(chef_run).to upgrade_package 'sysstat'
+    context 'package_action' do
+      context 'default' do
+        it 'upgrades the package' do
+          expect(chef_run).to upgrade_package 'sysstat'
+        end
+      end
+
+      context 'install' do
+        let(:chef_run) do
+          ChefSpec::Runner.new UBUNTU_OPTS do |node|
+            node.set['sysstat']['package_action'] = 'install'
+          end.converge(described_recipe)
+        end
+
+        it 'installs the package' do
+          expect(chef_run).to install_package 'sysstat'
+        end
+      end
     end
 
     it 'starts service' do

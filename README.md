@@ -18,6 +18,7 @@ Attributes
 * default['sysstat']['enabled'] - Run sysstat on boot.
 * default['sysstat']['sa1_options'] - Set/Add options to the sa1 cron job.
 * default['sysstat']['sa2_options'] - Set/Add options to the sa2 cron job.
+* default['sysstat']['package_action'] - Choose to upgrade/install the package.
 
 Usage
 =====

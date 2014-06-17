@@ -19,7 +19,7 @@
 #
 
 package 'sysstat' do
-  action :upgrade
+  action node['sysstat']['package_action'].to_sym
 end
 
 service 'sysstat' do

@@ -6,16 +6,18 @@
 # and /etc/cron.daily/sysstat files
 #
 
-# Should sadc collect system activity informations? Valid values
-# are "true" and "false". Please do not put other values, they
-# will be overwritten by debconf!
-ENABLED="<%= @enabled %>"
+# How long to keep log files (in days).
+# Used by sa2(8) script
+# If value is greater than 28, then log files are kept in
+# multiple directories, one for each month.
+HISTORY=<%= @history %>
 
-# Additional options passed to sa1 by /etc/init.d/sysstat
-# and /etc/cron.d/sysstat
-# By default contains the `-S DISK' option responsible for
-# generating disk statisitcs.
-SA1_OPTIONS="<%= @sa1_options %>"
+# Compress (using gzip or bzip2) sa and sar files older than (in days):
+COMPRESSAFTER=<%= @compress_after %>
 
-# Additional options passed to sa2 by /etc/cron.daily/sysstat.
-SA2_OPTIONS="<%= @sa2_options %>"
+# Parameters for the system activity data collector (see sadc(8) manual page)
+# which are used for the generation of log files.
+# By default contains the `-S DISK' option responsible for generating disk
+# statisitcs. Use `-S XALL' to collect all available statistics.
+SADC_OPTIONS="<%= @sadc_options %>"
+

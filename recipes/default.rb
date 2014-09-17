@@ -29,8 +29,8 @@ service 'sysstat' do
 end
 
 if platform? %w(debian ubuntu) # ~FC023
-  template node['sysstat']['settings'] do
-    source 'sysstat.erb'
+  template node['sysstat']['default'] do
+    source 'default.erb'
     owner 'root'
     group 'root'
     mode 00644
@@ -39,6 +39,21 @@ if platform? %w(debian ubuntu) # ~FC023
       enabled: node['sysstat']['enabled'],
       sa1_options: node['sysstat']['sa1_options'],
       sa2_options: node['sysstat']['sa2_options']
+    )
+
+    notifies :restart, 'service[sysstat]'
+  end
+
+  template node['sysstat']['sysstat'] do
+    source 'sysstat.erb'
+    owner 'root'
+    group 'root'
+    mode 00644
+
+    variables(
+      history: node['sysstat']['history'],
+      compress_after: node['sysstat']['compress_after'],
+      sadc_options: node['sysstat']['sadc_options']
     )
 
     notifies :restart, 'service[sysstat]'

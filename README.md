@@ -1,5 +1,6 @@
-[![Build Status](https://travis-ci.org/retr0h/cookbook-sysstat.png?branch=master)](https://travis-ci.org/retr0h/cookbook-sysstat)
-[![Dependency Status](https://gemnasium.com/retr0h/cookbook-sysstat.png)](https://gemnasium.com/retr0h/cookbook-sysstat)
+[![Build Status](http://img.shields.io/travis/retr0h/cookbook-sysstat.svg?style=flat-square)](https://travis-ci.org/retr0h/cookbook-sysstat)
+[![Dependency Status](http://img.shields.io/gemnasium/retr0h/cookbook-sysstat.svg?style=flat-square)](https://gemnasium.com/retr0h/cookbook-sysstat)
+[![Chef](http://img.shields.io/cookbook/v/sysstat.svg?style=flat-square)](https://supermarket.getchef.com/cookbooks/sysstat)
 
 Description
 ===========

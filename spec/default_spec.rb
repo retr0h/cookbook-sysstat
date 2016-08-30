@@ -7,9 +7,9 @@ describe 'sysstat::default' do
 
   context 'ubuntu' do
     let(:runner) do
-      ChefSpec::ServerRunner.new UBUNTU_OPTS do |node|
-        node.set['sysstat']['sa1_options'] = '-S DISK -S INT'
-        node.set['sysstat']['sa2_options'] = '-A'
+      ChefSpec::SoloRunner.new UBUNTU_OPTS do |node|
+        node.override['sysstat']['sa1_options'] = '-S DISK -S INT'
+        node.override['sysstat']['sa2_options'] = '-A'
       end
     end
     let(:chef_run) { runner.converge(described_recipe) }
@@ -23,8 +23,8 @@ describe 'sysstat::default' do
 
       context 'install' do
         let(:chef_run) do
-          ChefSpec::ServerRunner.new UBUNTU_OPTS do |node|
-            node.set['sysstat']['package_action'] = 'install'
+          ChefSpec::SoloRunner.new UBUNTU_OPTS do |node|
+            node.override['sysstat']['package_action'] = 'install'
           end.converge(described_recipe)
         end
 
@@ -68,7 +68,7 @@ describe 'sysstat::default' do
   end
 
   context 'redhat' do
-    let(:runner) { ChefSpec::ServerRunner.new REDHAT_OPTS }
+    let(:runner) { ChefSpec::SoloRunner.new REDHAT_OPTS }
     let(:chef_run) { runner.converge(described_recipe) }
 
     it "doesn't create file" do

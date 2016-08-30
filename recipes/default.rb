@@ -33,7 +33,7 @@ if platform? %w(debian ubuntu) # ~FC023
     source 'sysstat.erb'
     owner 'root'
     group 'root'
-    mode 00644
+    mode 0o644
 
     variables(
       enabled: node['sysstat']['enabled'],

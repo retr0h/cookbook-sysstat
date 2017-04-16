@@ -17,11 +17,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+default['sysstat']['package_action'] = 'upgrade'
+default['sysstat']['crontab'] = nil
 
-default['sysstat']['settings'] = File.join(
+# /etc/default/sysstat
+default['sysstat']['default'] = File.join(
   File::SEPARATOR, 'etc', 'default', 'sysstat'
 )
 default['sysstat']['enabled'] = 'true'
 default['sysstat']['sa1_options'] = '-S DISK'
 default['sysstat']['sa2_options'] = ''
-default['sysstat']['package_action'] = 'upgrade'
+
+# /etc/sysstat/sysstat
+default['sysstat']['sysstat'] = File.join(
+  File::SEPARATOR, 'etc', 'sysstat', 'sysstat'
+)
+default['sysstat']['history'] = 7
+default['sysstat']['compress_after'] = 10
+default['sysstat']['sadc_options'] = ''
